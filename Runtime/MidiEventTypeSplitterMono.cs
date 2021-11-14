@@ -217,7 +217,86 @@ public class MidiOneLinerDebug {
           value.AbsoluteTime,
           value.GetAsShortMessage());
     }
-   
+    public static void GetFrom(in IMidiEventBasicGet value, out string description)
+    {
+        if (value == null)
+        { description = "";return; }
+        value.GetShortenId(out int id);
+        value.GetSourceDeviceName(out string device);
+        value.GetUsedChannel(out int channel);
+        value.GetWhenReceived(out DateTime now);
+        description = string.Format("Source>{0}|{1} >C> {2} (D:{3})", id, device, channel, now.ToString("hh:mm:ss")); 
+    }
+    public static void GetFrom(in IMidiEventNamedElementGet value, out string description)
+    {
+        if (value == null)
+        { description = ""; return; }
+
+        value.GetGivenName(out string idName);
+        value.GetNameAsInteger(out int id);
+        description = string.Format("id>{0}|{1}", id, idName);
+    }
+    public static void GetFrom(in IMidiControlChangeEventGet value, out string description)
+    {
+        if (value == null)
+        { description = ""; return; }
+
+        GetFrom( value as IMidiEventBasicGet, out string info);
+        GetFrom( value as IMidiEventNamedElementGet, out string name);
+        value.GetControlRawValue(out int rawValue);
+        value.GetControlPercentValue(out IPercent01Get p01);
+        description = $"IControl:"+name+":"+info+">"+ rawValue+"-"+p01.GetPercent();
+    }
+
+    public static void GetFrom(in IMidiPatchChangeEventGet value, out string description)
+    {
+        if (value == null)
+        { description = ""; return; }
+
+        GetFrom(value as IMidiEventBasicGet, out string info);
+        GetFrom(value as IMidiEventNamedElementGet, out string name);
+        value.GetPatchRawValue(out int rawValue);
+        description = $"IPatch:" + name + ":" + info + ">" + rawValue ;
+    }
+
+    public static void GetFrom(in IMidiPitchChangeEventGet value, out string description)
+    {
+        if (value == null)
+        { description = ""; return; }
+
+        GetFrom(value as IMidiEventBasicGet, out string info);
+        GetFrom(value as IMidiEventNamedElementGet, out string name);
+        value.GetPitchRawValue(out int rawValue);
+        value.GetPitchPourcentValue(out IPercent01Get p01);
+        description = $"IPitch:" + name + ":" + info + ">" + rawValue + "-" + p01.GetPercent();
+    }
+
+    public static void GetFrom(in IMidiNoteEventGet value, out string description)
+    {
+        if (value == null)
+        { description = ""; return; }
+
+        GetFrom(value as IMidiEventBasicGet, out string info);
+        GetFrom(value as IMidiEventNamedElementGet, out string name);
+        value.IsOn(out bool rawValue);
+        value.GetVelocity(out IPercent01Get p01);
+        description = $"INote:" + name + ":" + info + ">" + rawValue + "-" + p01.GetPercent();
+    }
+
+    public static void GetFrom(in IMidiShortWithSourceGet shortValue, out string description)
+    {
+        if (shortValue == null)
+        { description = ""; return; }
+
+        shortValue.GetShortId(out int id);
+        shortValue.GetSource(out IMidiInSourceGet source);
+        shortValue.GetWhenReceived(out DateTime when);
+        source.GetSourceDeviceName(out string name);
+        description = $"IS:" +  name + ":" + id + ">" + when.ToString("hh:mm:ss") ;
+
+
+
+    }
 }
 
 

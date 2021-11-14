@@ -16,6 +16,12 @@ public class MidiInMono : MonoBehaviour
     [Header("Listen")]
     public UnityMidiEventArgsEvent m_onUnityThreadEvent;
     public UnityMidiEventArgsEvent m_onListenerThreadEvent;
+
+    public void GetSourceName(out string givenName)
+    {
+        givenName = m_midiNameId;
+    }
+
     public Queue<MidiInMessageEventArgs> m_pushOnUnityThread= new Queue<MidiInMessageEventArgs>();
 
     [Header("Debug")]

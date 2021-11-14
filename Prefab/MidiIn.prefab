@@ -58,6 +58,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2300041059342453555}
+        m_TargetAssemblyTypeName: WindowMidiInConverterToAbstractMono, be.eloistree.midireaderwindowandroid
+        m_MethodName: PushIn
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_allEventArgsReceived:
     m_PersistentCalls:
       m_Calls: []
@@ -66,6 +78,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UI_Midi_NoteOnOff, Assembly-CSharp
+        m_MethodName: PushIn
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2300041059342453555}
+        m_TargetAssemblyTypeName: WindowMidiInConverterToAbstractMono, be.eloistree.midireaderwindowandroid
         m_MethodName: PushIn
         m_Mode: 0
         m_Arguments:
@@ -91,12 +115,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_onControllEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI_Midi_RawInputHistory, OnlyWindowTest
-        m_MethodName: AppendNewValue
+      - m_Target: {fileID: 2300041059342453555}
+        m_TargetAssemblyTypeName: WindowMidiInConverterToAbstractMono, be.eloistree.midireaderwindowandroid
+        m_MethodName: PushIn
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -106,6 +127,39 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_onControllEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2300041059342453555}
+        m_TargetAssemblyTypeName: WindowMidiInConverterToAbstractMono, be.eloistree.midireaderwindowandroid
+        m_MethodName: PushIn
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_onPitchEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2300041059342453555}
+        m_TargetAssemblyTypeName: WindowMidiInConverterToAbstractMono, be.eloistree.midireaderwindowandroid
+        m_MethodName: PushIn
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_onStartPauseStopEvent:
+    m_PersistentCalls:
+      m_Calls: []
   m_notHandleEvents:
     m_PersistentCalls:
       m_Calls: []
@@ -113,6 +167,9 @@ MonoBehaviour:
     m_historySize: 10
     m_history: []
   m_historyLogDebug:
+    m_historySize: 10
+    m_history: []
+  m_historyNotHandleDebug:
     m_historySize: 10
     m_history: []
 --- !u!1 &2101665756651232307
@@ -218,6 +275,7 @@ GameObject:
   - component: {fileID: 2101665756792650333}
   - component: {fileID: 2101665756792650320}
   - component: {fileID: 2101665756792650335}
+  - component: {fileID: 2300041059342453555}
   m_Layer: 0
   m_Name: MidiIn
   m_TagString: Untagged
@@ -345,3 +403,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2300041059342453555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2101665756792650332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e593741401c37e49879a49b2bc50865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_relay:
+    m_onShortReceived:
+      m_PersistentCalls:
+        m_Calls: []
+    m_onNoteReceived:
+      m_PersistentCalls:
+        m_Calls: []
+    m_onPitchReceived:
+      m_PersistentCalls:
+        m_Calls: []
+    m_controlReceived:
+      m_PersistentCalls:
+        m_Calls: []
+    m_patchReceived:
+      m_PersistentCalls:
+        m_Calls: []
+  m_monoSource:
+    m_source: {fileID: 2101665756792650333}
