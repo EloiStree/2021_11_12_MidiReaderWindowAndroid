@@ -6,6 +6,8 @@ using UnityEngine;
 public class UI_AbstractMidi_DebugLine : MonoBehaviour, IAbstractMidiGetHandler
 {
 
+    public object m_data;
+
    public UI_AbstractMidi_DebugLine_PitchChange   m_pitchDisplay;
    public UI_AbstractMidi_DebugLine_ControlChange m_controlDisplay;
    public UI_AbstractMidi_DebugLine_NoteChange    m_noteDisplay;
@@ -13,43 +15,71 @@ public class UI_AbstractMidi_DebugLine : MonoBehaviour, IAbstractMidiGetHandler
    public UI_AbstractMidi_DebugLine_ShortChange   m_shortDisplay;
 
 
+    private void Update()
+    {
+        if (m_data is IMidiControlChangeEventGet)
+        {
+            DisableAll();
+            m_controlDisplay.gameObject.SetActive(true);
+            m_controlDisplay.PushIn((IMidiControlChangeEventGet)m_data);
+        }
+        else if (m_data is IMidiShortWithSourceGet)
+        {
+            DisableAll();
+            m_controlDisplay.gameObject.SetActive(true);
+            m_shortDisplay.PushIn((IMidiShortWithSourceGet)m_data);
+        }
+        else if (m_data is IMidiPitchChangeEventGet)
+        {
+            DisableAll();
+            m_pitchDisplay.gameObject.SetActive(true);
+            m_pitchDisplay.PushIn((IMidiPitchChangeEventGet)m_data);
+        }
+        else if (m_data is IMidiPatchChangeEventGet)
+        {
+            DisableAll();
+            m_patchDisplay.gameObject.SetActive(true);
+            m_patchDisplay.PushIn((IMidiPatchChangeEventGet)m_data);
+        }
+        else if (m_data is IMidiNoteEventGet)
+        {
+            DisableAll();
+            m_noteDisplay.gameObject.SetActive(true);
+            m_noteDisplay.PushIn((IMidiNoteEventGet)m_data);
+        }
+        m_data = null;
+    }
+
+
     public void PushIn(IMidiNoteEventGet value)
     {
-        DisableAll();
-        m_noteDisplay.gameObject.SetActive(true);
-        m_noteDisplay.PushIn(value);
+
+        m_data = value;
     }
 
 
     public void PushIn(IMidiPitchChangeEventGet value)
     {
-        DisableAll();
-        m_pitchDisplay.gameObject.SetActive(true);
-        m_pitchDisplay.PushIn(value);
+        m_data = value;
+      
 
     }
     public void PushIn(IMidiControlChangeEventGet value)
     {
 
-        DisableAll();
-        m_controlDisplay.gameObject.SetActive(true);
-        m_controlDisplay.PushIn(value);
+        m_data = value;
     }
     public void PushIn(IMidiPatchChangeEventGet value)
     {
 
-        DisableAll();
-        m_patchDisplay.gameObject.SetActive(true);
-        m_patchDisplay.PushIn(value);
+        m_data = value;
     }
     public void PushIn(IMidiShortWithSourceGet value)
     {
-        DisableAll();
-        m_shortDisplay.gameObject.SetActive(true);
-        m_shortDisplay.PushIn(value);
+        m_data = value;
 
     }
-    private void DisableAll()
+    public void DisableAll()
     {
         m_pitchDisplay.gameObject.SetActive(false);
         m_controlDisplay.gameObject.SetActive(false);

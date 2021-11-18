@@ -60,11 +60,13 @@ public class MidiEventTypeSplitterMono : MonoBehaviour
             NoteEvent noteEvt = me as NoteEvent;
             MidiOneLinerDebug.GetFrom(in noteEvt, out string description);
             m_historyLogDebug.PushIn(description);
-            try
-            {
+            //try
+            //{
                 m_onNoteEvent.Invoke(noteEvt);
-            }
-            catch (Exception exc) { Debug.LogWarning(exc.StackTrace); }
+            //}
+            //catch (Exception exc) {
+            //    Debug.LogWarning(exc.StackTrace);
+            //}
             return;
         }
         else if (me is ControlChangeEvent)
